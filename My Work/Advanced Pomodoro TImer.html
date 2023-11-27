@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro TImer</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Phudu&family=Prompt&display=swap');
+
+        html {
+            font-size: 15px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            background-image: linear-gradient(to right bottom, #de0e17, #e22d15, #e54013, #e84f12, #eb5d12);
+        }
+
+        h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+            height: 7rem;
+            font-size: 3.125rem;
+            color: white;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        h1#heading2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+            height: 4rem;
+            font-size: 2.125rem;
+            color: white;
+            font-family: 'Prompt', sans-serif;
+        }
+
+        #box {
+            width: 50%;
+            height: 56vh;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            margin: 5vh auto 0vh;
+            border: none;
+            border-radius: 0.6rem;
+            z-index: 0;
+        }
+
+        #box2 {
+            min-width: 50%;
+            height: 10vh;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 1.5rem;
+            margin: 0vh auto;
+            border: none;
+            font-family: 'Bebas Neue', sans-serif;
+            border-radius: 0.6rem;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #Time_types {
+            width: 80%;
+            height: 10vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            text-transform: capitalize;
+        }
+
+        .type {
+            width: 10vw;
+            height: 6vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background: #e22d15;
+            border-radius: 0.6rem;
+            cursor: pointer;
+            transition: 1s;
+            font-size: 1.125rem;
+            font-family: 'Phudu', cursive;
+        }
+
+        .type:hover {
+            background: white;
+            color: #e22d15;
+            box-shadow: 0px 0px 0.938rem 0.25rem rgba(255, 255, 255, 0.89);
+        }
+
+        .type:active {
+            transform: scale(.50);
+        }
+
+        #time_input {
+            width: 50%;
+            height: 30vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            /* margin-bottom: 4vh; */
+            overflow: hidden;
+        }
+
+        input {
+            border-radius: 0.6rem;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        #colon,
+        #minutes_input,
+        #seconds_input {
+            width: 10vw;
+            height: 15vh;
+            font-size: 6rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        #btns {
+            width: 35vw;
+            /* background-color: black; */
+            height: 8vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        button {
+            width: 10vw;
+            height: 5vh;
+            font-size: 1.3rem;
+            border-radius: 0.3rem;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            letter-spacing: 0.3vw;
+            box-shadow: 0px 0.50rem 0px 0px rgba(0, 0, 0, 0.3);
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        button:hover .icon {
+            color: #de0e17;
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        #sgear {
+            display: block;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            cursor: pointer;
+            z-index: 2;
+            /* background-color: white; */
+        }
+
+        #cgear {
+            display: block;
+            position: absolute;
+            cursor: pointer;
+            z-index: 0;
+            right: 10px;
+            top: 15px;
+            color: white;
+            font-weight: 20px;
+        }
+
+        #setting {
+            background-image: linear-gradient(to right bottom, #0dc00c, #00bd4f, #00b873, #00b28c, #09aa9b);
+            opacity: 1;
+            width: 100%;
+            top: 0;
+            display: none;
+            position: absolute;
+            height: 100vh;
+        }
+
+
+        section#menu {
+            color: white;
+            background-color: rgba(235, 235, 235, 0.2);
+            width: 40%;
+            height: 70%;
+            margin: 4vh auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 30px;
+            overflow: hidden;
+            border-radius: 20px;
+            border: none;
+            font-family: 'Bebas Neue', sans-serif;
+            outline-style: double;
+            outline-width: 4px;
+            outline-color: black;
+        }
+
+        .timemenu {
+            width: 8vw;
+            height: 10vh;
+            margin-bottom: 2vh;
+            font-size: 50px;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: .2vw;
+        }
+
+        @media screen and (max-width:1150px) {}
+
+        @media screen and (max-width:750px) {
+            html {
+                font-size: 15px;
+            }
+
+            #box {
+                min-width: 40%;
+                height: 70vh;
+            }
+
+            #Time_types {
+                height: 15vh;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .type {
+                min-width: 80%;
+                height: 3vh;
+                font-weight: 300;
+                font-size: 1rem;
+                font-family: 'Phudu', cursive;
+            }
+
+            #time_input {
+                min-width: 80%;
+                height: 20vh;
+                display: flex;
+            }
+
+
+            #colon,
+            #minutes_input,
+            #seconds_input {
+                width: 15vw;
+                height: 15vh;
+                font-size: 4rem;
+                text-align: center;
+            }
+
+            #btns {
+                width: 80%;
+                height: 8vh;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            button {
+                min-width: 30%;
+                height: 3vh;
+                font-size: 1rem;
+            }
+
+            section#menu {
+                font-size: 20px;
+            }
+
+            .timemenu {
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width:450px) {
+            #box {
+                min-width: 80%;
+            }
+
+            #time_input {
+                min-width: 80%;
+                flex-direction: row;
+                height: auto;
+                margin: 3vh 0vh;
+            }
+
+            #time_input input {
+                width: 40%;
+                height: 14vh;
+                font-size: 4rem;
+            }
+            #setting{
+                height: 125vh;
+            }
+
+            section#menu {
+                min-width: 80%;
+                height: 70vh;
+            }
+
+            section#menu span {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 90%;
+                flex-wrap: nowrap;
+                padding: 1vh;
+            }
+
+            .timemenu {
+                width: 16vw;
+                height: 10vh;
+                margin-bottom: 2vh;
+                font-size: 50px;
+                font-family: 'Bebas Neue', sans-serif;
+                letter-spacing: .2vw;
+            }
+        }
+
+        @media screen and (max-width:350px) {
+            h1 {
+                font-size: 2.125rem;
+            }
+
+            .type {
+                letter-spacing: .1rem;
+                font-weight: 100;
+                font-size: .5rem;
+                font-family: 'Phudu', cursive;
+            }
+
+            section#menu {
+                color: white;
+                background-color: rgba(235, 235, 235, 0.2);
+                width: 40%;
+                height: 80%;
+                font-size: 15px;
+            }
+
+            #box {
+                min-width: 80%;
+                height: auto;
+                padding: 3vh 3vh;
+            }
+
+            #box2 {
+                font-size: 1rem;
+            }
+
+            #Time_types {
+                min-width: 100%;
+                flex-direction: column;
+            }
+
+            #Time_types .type {
+                min-width: 50%;
+                font-size: .6rem;
+            }
+
+            #time_input {
+                min-width: 80%;
+                flex-direction: row;
+                height: auto;
+                margin: 3vh 0vh;
+            }
+
+            #time_input input {
+                width: 40%;
+                height: 14vh;
+                font-size: 4rem;
+            }
+
+            #btns {
+                min-width: 90%;
+                height: max-content;
+                flex-direction: row;
+
+            }
+
+            #btns button {
+                min-width: 30%;
+                font-size: 1rem;
+            }
+            section#menu {
+                min-width: 80%;
+                height: 50%;
+            }
+
+            section#menu span {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                width: 90%;
+                flex-wrap: nowrap;
+                padding: 1vh;
+            }
+
+            .timemenu {
+                width: 16vw;
+                height: 10vh;
+                margin-bottom: 2vh;
+                font-size: 50px;
+                font-family: 'Bebas Neue', sans-serif;
+                letter-spacing: .2vw;
+            }
+        }
+
+        @media screen and (max-width:250px) {
+            #time_input input {
+                width: 100%;
+                height: 14vh;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pomodoro App</h1>
+    <div id="setting" class="">
+        <h1>Set Custom Time</h1>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" id="cgear"
+            viewBox="0 0 16 16">
+            <path
+                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+            <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+        </svg>
+        <section id="menu">
+            <span>
+                <label for="pomodoro">Enter Pomorodo Time <br>
+                </label> <input id="pminute" class="timemenu" type="number"> : <input id="psecond" class="timemenu"
+                    type="number">
+            </span>
+            <span>
+                <label for="short-break">Enter Short-Break Time <br>
+                </label> <input id="sminute" class="timemenu" type="number"> : <input id="ssecond" class="timemenu"
+                    type="number">
+            </span>
+            <span>
+                <label for="long-break">Enter Long-Break Time <br>
+                </label> <input id="lminute" class="timemenu" type="number"> : <input id="lsecond" class="timemenu"
+                    type="number">
+            </span>
+            <span>
+                <button id="timeSubmit" type="submit">Submit</button>
+            </span>
+        </section>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" id="sgear" viewBox="0 0 16 16">
+        <path
+            d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+    </svg>
+
+    <section id="box">
+        <div id="Time_types">
+            <h3 class="type">pomodoro</h3>
+            <h3 class="type">short-break</h3>
+            <h3 class="type">long-break</h3>
+        </div>
+        <div id="time_input">
+            <input type="number" id="minutes_input" value="25" readonly>
+            <div id="colon">:</div>
+            <input type="number" id="seconds_input" value="00" readonly>
+        </div>
+        <div id="btns">
+            <button id="startTime">Start <svg class="icon" xmlns="http://www.w3.org/2000/svg" height=".7em"
+                    viewBox="0 0 384 512">
+                    <path
+                        d="M32 0C14.3 0 0 14.3 0 32S14.3 64 32 64V75c0 42.4 16.9 83.1 46.9 113.1L146.7 256 78.9 323.9C48.9 353.9 32 394.6 32 437v11c-17.7 0-32 14.3-32 32s14.3 32 32 32H64 320h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V437c0-42.4-16.9-83.1-46.9-113.1L237.3 256l67.9-67.9c30-30 46.9-70.7 46.9-113.1V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320 64 32zM288 437v11H96V437c0-25.5 10.1-49.9 28.1-67.9L192 301.3l67.9 67.9c18 18 28.1 42.4 28.1 67.9z" />
+                </svg></button>
+            <button id="stopTime">Stop <svg xmlns="http://www.w3.org/2000/svg" height=".8em" viewBox="0 0 384 512">
+                    <path
+                        d="M0 128C0 92.7 28.7 64 64 64H320c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+                </svg></button>
+            <button id="reset">Reset <svg xmlns="http://www.w3.org/2000/svg" height=".8em" viewBox="0 0 512 512">
+                    <path
+                        d="M463.5 224H472c13.3 0 24-10.7 24-24V72c0-9.7-5.8-18.5-14.8-22.2s-19.3-1.7-26.2 5.2L413.4 96.6c-87.6-86.5-228.7-86.2-315.8 1c-87.5 87.5-87.5 229.3 0 316.8s229.3 87.5 316.8 0c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0c-62.5 62.5-163.8 62.5-226.3 0s-62.5-163.8 0-226.3c62.2-62.2 162.7-62.5 225.3-1L327 183c-6.9 6.9-8.9 17.2-5.2 26.2s12.5 14.8 22.2 14.8H463.5z" />
+                </svg></button>
+        </div>
+    </section>
+
+    <h1 id="heading2">Cycle Count</h1>
+    <section id="box2">
+        <div>Pomodoro Cycle: <span id="pcount">0</span></div>
+        <div>Short-Break Cycle: <span id="scount">0</span></div>
+        <div>Long-Break Cycle: <span id="lcount">0</span></div>
+
+    </section>
+
+    <script>
+        let obj2 = {
+            pminute: 0,
+            psecond: 0,
+            sminute: 0,
+            ssecond: 0,
+            lminute: 0,
+            lsecond: 0
+        }
+
+        let reset = document.getElementById("reset")
+        let minutes = document.getElementById("minutes_input");
+        let seconds = document.getElementById("seconds_input");
+        let count = 2
+        let pcount = 1
+        let scount = 1
+        let lcount = 0
+        let startTime = document.getElementById("startTime");
+        let stoptime = document.getElementById("stopTime");
+        let time = null;
+        let myAudio = new Audio('alarm-clock-short-6402.mp3')
+        let obj = {
+            minute: minutes.value,
+            second: seconds.value,
+        }
+
+        let settingbtn = document.getElementById("sgear");
+        settingbtn.addEventListener("click", () => {
+            console.log("setting Btn Clicked");
+            settingbtn.style.zIndex = -1
+            canclebtn.style.zIndex = 3
+            document.getElementById("setting").style.display = "block"
+            document.getElementById("cgear").style.zIndex = 3
+        })
+
+        let canclebtn = document.getElementById("cgear");
+        canclebtn.addEventListener("click", () => {
+            console.log("cancle Btn Clicked");
+            canclebtn.style.zIndex = -1
+            settingbtn.style.zIndex = 2
+            document.getElementById("setting").style.display = "none"
+            document.getElementById("cgear").style.zIndex = 0
+        })
+        let timeSubmit = document.getElementById("timeSubmit");
+        timeSubmit.addEventListener("click", () => {
+            let pminutes = document.getElementById("pminute");
+            let pseconds = document.getElementById("psecond");
+            let sminutes = document.getElementById("sminute");
+            let sseconds = document.getElementById("ssecond");
+            let lminutes = document.getElementById("lminute");
+            let lseconds = document.getElementById("lsecond");
+            obj2.pminute = pminutes.value,
+                obj2.psecond = pseconds.value,
+                obj2.sminute = sminutes.value,
+                obj2.ssecond = sseconds.value,
+                obj2.lminute = lminutes.value,
+                obj2.lsecond = lseconds.value
+            minutes.value = pminutes.value
+            seconds.value = pseconds.value
+            canclebtn.style.zIndex = -1
+            settingbtn.style.zIndex = 2
+            document.getElementById("setting").style.display = "none"
+            document.getElementById("cgear").style.zIndex = 0
+        })
+
+        function switchtoPomo() {
+            pomobtn.style.background = "white"
+            pomobtn.style.color = "#e22d15"
+            document.body.style.backgroundImage = "linear-gradient(to right bottom, #de0e17, #e22d15, #e54013, #e84f12, #eb5d12)";
+            Shortbtn.style.background = "#e22d15"
+            Shortbtn.style.color = "white"
+            Longbtn.style.background = "#e22d15"
+            Longbtn.style.color = "white"
+            if (obj2.pminute == 0 && obj2.psecond == 0) {
+                minutes.value = 25;
+                seconds.value = "00"
+            }
+            else {
+                minutes.value = obj2.pminute
+                seconds.value = obj2.psecond
+            }
+            obj.minute = minutes.value,
+                obj.second = seconds.value,
+                console.log(obj);
+
+        }
+        function switchtoShort() {
+            pomobtn.style.background = "#004d7a"
+            pomobtn.style.color = "white"
+            Shortbtn.style.background = "white"
+            Shortbtn.style.color = "#004d7a"
+            document.body.style.backgroundImage = "linear-gradient(to right bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12)";
+            Longbtn.style.background = "#004d7a"
+            Longbtn.style.color = "white"
+            if (obj2.sminute == 0 && obj2.ssecond == 0) {
+
+                minutes.value = "05";
+                seconds.value = "00"
+            }
+            else {
+                minutes.value = obj2.sminute
+                seconds.value = obj2.ssecond
+            }
+
+            obj.minute = minutes.value,
+                obj.second = seconds.value,
+                console.log(obj);
+        }
+        function switchtoLong() {
+            pomobtn.style.background = "#0a9114"
+            pomobtn.style.color = "white"
+            Shortbtn.style.background = "#0a9114"
+            Shortbtn.style.color = "white"
+            Longbtn.style.background = "white"
+            Longbtn.style.color = "#0a9114"
+            document.body.style.backgroundImage = "linear-gradient(to right bottom, #036f11, #0a9114, #17b414, #26d90f, #38ff00)";
+            if (obj2.lminute == 0 && obj2.lsecond == 0) {
+
+                minutes.value = 15;
+                seconds.value = "00";
+            }
+            else {
+                minutes.value = obj2.lminute
+                seconds.value = obj2.lsecond
+            }
+            obj.minute = minutes.value,
+                obj.second = seconds.value,
+                console.log(obj);
+        }
+
+        function PomodoroTime() {
+
+            if (minutes.value != 0 && seconds.value == 0) {
+                minutes.value.innerHTML = minutes.value--;
+                seconds.value = 59;
+
+            }
+            else if (minutes.value == 0 && seconds.value == 0) {
+                console.log(`${minutes.value}:${seconds.value}`)
+                clearInterval(time)
+                myAudio.play()
+                minutes.value = obj.minute
+                seconds.value = obj.second
+                console.log("Time-Out");
+
+                if (count % 2 == 0 && pcount < 5) {
+                    switchtoShort()
+                    document.getElementById("pcount").innerText = pcount
+                    alert("p TIme up" + pcount)
+                    pcount++;
+                    count++;
+                }
+                else if (count % 2 == 1 && scount < 5) {
+                    if (pcount == 5) {
+                        switchtoLong();
+                        document.getElementById("lcount").innerText = 1
+                    }
+                    else {
+                        switchtoPomo()
+                        document.getElementById("scount").innerText = scount
+                        alert("s TIme up" + scount)
+                        scount++;
+                        count++;
+                    }
+                }
+            }
+            else {
+                console.log(`${minutes.value}:${seconds.value}`)
+                seconds.value--;
+            }
+        }
+
+        let pomobtn = document.getElementsByTagName("h3")[0]
+        pomobtn.addEventListener("click", () => {
+            pomobtn.style.background = "white"
+            pomobtn.style.color = "#e22d15"
+            document.body.style.backgroundImage = "";
+            Shortbtn.style.background = "#e22d15"
+            Shortbtn.style.color = "white"
+            Longbtn.style.background = "#e22d15"
+            Longbtn.style.color = "white"
+            if (obj2.sminute == 0 && obj2.ssecond == 0) {
+                minutes.value = 25;
+                seconds.value = "00"
+            }
+            else {
+                minutes.value = obj2.pminute
+                seconds.value = obj2.psecond
+            }
+            obj.minute = minutes.value,
+                obj.second = seconds.value,
+                console.log(obj);
+        })
+
+        let Shortbtn = document.getElementsByTagName("h3")[1]
+        Shortbtn.addEventListener("click", () => {
+            pomobtn.style.background = "#004d7a"
+            pomobtn.style.color = "white"
+            Shortbtn.style.background = "white"
+            Shortbtn.style.color = "#004d7a"
+            document.body.style.backgroundImage = "linear-gradient(to right bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12)";
+            Longbtn.style.background = "#004d7a"
+            Longbtn.style.color = "white"
+            if (obj2.sminute == 0 && obj2.ssecond == 0) {
+
+                minutes.value = "05";
+                seconds.value = "00"
+            }
+            else {
+                minutes.value = obj2.sminute
+                seconds.value = obj2.ssecond
+            }
+
+            obj.minute = minutes.value,
+                obj.second = seconds.value,
+                console.log(obj);
+        })
+
+        let Longbtn = document.getElementsByTagName("h3")[2]
+        Longbtn.addEventListener("click", () => {
+            pomobtn.style.background = "#0a9114"
+            pomobtn.style.color = "white"
+            Shortbtn.style.background = "#0a9114"
+            Shortbtn.style.color = "white"
+            Longbtn.style.background = "white"
+            Longbtn.style.color = "#0a9114"
+            document.body.style.backgroundImage = "linear-gradient(to right bottom, #036f11, #0a9114, #17b414, #26d90f, #38ff00)";
+            if (obj2.lminute == 0 && obj2.lsecond == 0) {
+
+                minutes.value = 15;
+                seconds.value = "00";
+            }
+            else {
+                minutes.value = obj2.lminute
+                seconds.value = obj2.lsecond
+            }
+            obj.minute = minutes.value,
+                obj.second = seconds.value,
+                console.log(obj);
+        })
+
+        startTime.addEventListener("click", () => {
+            time = setInterval(() => {
+                PomodoroTime()
+            }, 1000);
+        })
+
+        stoptime.addEventListener("click", () => {
+            clearInterval(time)
+            if (minutes.value == obj.minute) {
+
+                startTime.innerHTML = "Start"
+            }
+            else {
+                startTime.innerHTML = `Resume <svg xmlns="http://www.w3.org/2000/svg"  height=".7em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg>`
+            }
+
+        })
+
+        reset.addEventListener("click", () => {
+            clearInterval(time)
+            startTime.innerHTML = `Start <svg xmlns="http://www.w3.org/2000/svg"  height=".8em"
+                    viewBox="0 0 384 512"><path
+                        d="M32 0C14.3 0 0 14.3 0 32S14.3 64 32 64V75c0 42.4 16.9 83.1 46.9 113.1L146.7 256 78.9 323.9C48.9 353.9 32 394.6 32 437v11c-17.7 0-32 14.3-32 32s14.3 32 32 32H64 320h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V437c0-42.4-16.9-83.1-46.9-113.1L237.3 256l67.9-67.9c30-30 46.9-70.7 46.9-113.1V64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320 64 32zM288 437v11H96V437c0-25.5 10.1-49.9 28.1-67.9L192 301.3l67.9 67.9c18 18 28.1 42.4 28.1 67.9z" />
+                </svg>`
+            minutes.value = obj.minute
+            seconds.value = obj.second
+        })
+    </script>
+</body>
+
+</html>

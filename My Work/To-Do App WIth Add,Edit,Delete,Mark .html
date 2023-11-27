@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2017/06/10/07/18/list-2389219_1280.png" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans:wght@500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #5cdb95;
+        }
+
+        h1 {
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            font-size: 2.8rem;
+            justify-content: center;
+            align-items: center;
+            color: #edf5e1;
+            background-color: #379683;
+            margin-bottom: 3rem;
+            font-family: 'Tilt Prism', cursive;
+        }
+
+        .box {
+            max-width: 60rem;
+            height: 27rem;
+        }
+
+        #username {
+            background-color: #edf5e1;
+        }
+
+        #username::placeholder {
+            color: #05368b;
+        }
+
+        #addTask {
+            background-color: #05368b;
+            border: none;
+            font-family: 'Tilt Prism', cursive;
+        }
+
+        .display {
+            width: inherit;
+            height: inherit;
+            overflow: auto;
+            background-color: #379683;
+        }
+
+        table {
+            min-width: inherit;
+            height: inherit;
+        }
+
+        tr {
+            display: flex;
+        }
+
+        #st,
+        #rd {
+            height: 10vh;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #edf5e1;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        #st {
+            min-width: 5rem;
+        }
+
+        #nd {
+            height: 10vh;
+            align-items: center;
+            display: flex;
+            color: #edf5e1;
+            width: 45rem;
+            overflow: auto;
+            font-size: 1.2rem;
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        #rd {
+            min-width: 9rem;
+        }
+
+        .done {
+            text-decoration: line-through;
+        }
+
+        @media screen and (max-width: 970px) {
+            html {
+                font-size: 13px;
+            }
+        }
+
+        @media screen and (max-width: 790px) {
+            html {
+                font-size: 10px;
+            }
+
+            .display {
+                width: inherit;
+                height: 40rem;
+                overflow: auto;
+                background-color: #379683;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            html {
+                font-size: 8px;
+            }
+
+            .display {
+                width: inherit;
+                height: 50rem;
+                overflow: auto;
+                background-color: #379683;
+            }
+        }
+
+        @media screen and (max-width: 490px) {
+            html {
+                font-size: 8px;
+            }
+
+            .box {
+                max-width: 50rem;
+                height: 27rem;
+            }
+
+            .display {
+                min-width: inherit;
+                height: 50rem;
+                overflow: auto;
+                background-color: #379683;
+            }
+
+            #st,
+            #rd {
+                height: 10vh;
+            }
+
+            #st {
+                min-width: 5rem;
+            }
+
+            #nd {
+                height: 10vh;
+                max-width: 35rem;
+            }
+            #rd {
+                max-width: 9rem;
+            }
+        }
+        @media screen and (max-width: 410px) {
+            html {
+                font-size: 8px;
+            }
+
+            .box {
+                max-width: 30rem;
+                height: 27rem;
+            }
+
+            /* .display {
+                min-width: inherit;
+                height: 50rem;
+                overflow: auto;
+                background-color: #379683;
+            } */
+
+            #st,
+            #rd {
+                height: 10vh;
+            }
+
+            #st {
+                min-width: 5rem;
+            }
+
+            #nd {
+                height: 10vh;
+                max-width: 15rem;
+            }
+            #rd {
+                max-width: 9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>To - Do List</h1>
+    <div class="mx-auto mt-5 box">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter Your To-Do" id="username">
+            <button class="btn text-white btn-info" type="button" id="addTask">Add Task</button>
+        </div>
+        <div class="display">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th id="st">No.</th>
+                        <th id="nd">Your List</th>
+                        <th id="rd">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="records">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const addTextBtn = document.getElementById('addTask');
+        const btntext = addTextBtn.innerText;
+        const userData = document.getElementById('username');
+        const recordsData = document.getElementById('records');
+        let editId = null
+        let userdataArray = [];
+
+        let obj = localStorage.getItem('todo');
+        if (obj != null) {
+
+            userdataArray = JSON.parse(obj)
+        }
+        // console.log(userdataArray);
+        displayToDo();
+        addTextBtn.addEventListener("click", function () {
+            const name = userData.value
+            if (editId != null) {
+                userdataArray.splice(editId, 1, { 'task': name })
+                editId = null
+            }
+            else {
+                userdataArray.push({ 'task': name });
+            }
+            saveToDo(userdataArray)
+            userData.value = ""
+            displayToDo();
+            addTextBtn.innerText = btntext
+        })
+
+        // TO SAVE TODO LIST TO LOCAL STORAGE
+        function saveToDo(userdataArray) {
+            let str = JSON.stringify(userdataArray)
+            localStorage.setItem("todo", str)
+        }
+
+        // TO DISPLAY ALL TODO LIST
+        function displayToDo() {
+            let show = '';
+            userdataArray.forEach((element, i) => {
+                show += `
+                <tr>
+                    <td id="st" >${i + 1}</td>
+                    <td id="nd" class"notDone" ><span class="check">${element.task}</span></td>
+                    <td id="rd" ><i class="btn text-white fa fa-check btn-info" onclick="check(${i})"></i>
+<i class="btn text-white fa fa-edit btn-info mx-1" onclick="editToDo(${i})"></i> <i class="btn btn-danger text-white fa fa-trash" onclick="deleteToDo(${i})"></i></td>
+                    </tr>`;
+            });
+            recordsData.innerHTML = show
+        }
+
+        // TO EDIT SPECIFED TODO LIST
+        function editToDo(id) {
+            editId = id
+            userData.value = userdataArray[editId].task
+            addTextBtn.innerText = "Save Changes"
+        }
+
+        // TO DELETE SPECIFED TODO LIST
+        function deleteToDo(id) {
+            userdataArray.splice(id, 1);
+            saveToDo(userdataArray)
+            displayToDo();
+        }
+        
+        // TO CHECK MARK SPECIFE TODO LIST
+        function check(id) {
+            let done = document.querySelectorAll(".check")[id]
+            // if (done.style.textDecoration == 'none') {
+            //     done.style.textDecoration = "line-through"
+            // }
+            // else{
+            //     done.style.textDecoration = "none"
+            // }
+            done.classList.toggle("done")
+        }
+    </script>
+</body>
+
+</html>

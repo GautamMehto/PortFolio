@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App </title>
+    <link rel="stylesheet" href="Weather.css">
+</head>
+
+<body>
+    <div class="card-container">
+        <div class="card">
+            <div class="search">
+                <input id="cityname" type="text" placeholder="Enter Any City Name" spellcheck="false">
+                <button id="searchbtn"><img src="Weather images/search.png" alt="Error in Path"></button>
+            </div>
+            <div class="errormsg">
+                <p>You Entered Invaild City Name</p>
+            </div>
+            <div class="weather">
+                <img src="Weather images/wind.png" class="Weather-icon" alt="Error in Path">
+                <h1 class="Temp">-10°C</h1>
+                <h2 class="city-name">Delhi</h2>
+                <div class=" details">
+                    <div class="col">
+                        <img src="Weather images/humidity.png" alt="Error in Path">
+                        <div>
+                            <p class="humidity">50%</p>
+                            <p>humidity</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img src="Weather images/wind.png" alt="Error in Path">
+                        <div>
+                            <p class="wind">15km/h</p>
+                            <p>wind Speed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card2">
+            <div class="weatherFive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Temperture</th>
+                            <th>Humidity</th>
+                            <th>Wind Speed</th>
+                            <th>Feel like</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- https://api.openweathermap.org/data/2.5/weather?q=bihar&appid=fb3b875ea1ce4aae0063c60c33679710 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="Weather.js"></script>
+</body>
+
+</html>

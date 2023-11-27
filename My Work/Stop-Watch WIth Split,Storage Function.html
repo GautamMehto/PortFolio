@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Phudu&family=Poppins:wght@300&family=Prompt&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-image: linear-gradient(to right bottom, #008b74, #1ba68d, #2ec1a8, #3fdec3, #4ffbdf);
+        }
+
+        h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 15vh;
+            font-size: 50px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #timeHeading {
+            width: max-content;
+            background-color: red;
+
+        }
+
+        #box {
+            width: 60%;
+            height: 52vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10vh auto 5vh auto;
+            border-radius: 20px;
+            background-color: rgba(151, 177, 171, 0.6);
+            box-shadow: 0px 0px 10px 4px rgba(151, 177, 171, 0.904);
+            font-family: 'Prompt', sans-serif;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+
+        #time_input {
+            width: 100%;
+            height: 20vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4vh;
+            font-size: 100px;
+        }
+
+        .timeBox {
+            width: 11vw;
+            height: 13vh;
+            font-size: 80px;
+            text-align: center;
+            border-radius: 40px;
+            border: 1px solid black;
+            font-family: 'Phudu', cursive;
+            background-color: rgba(255, 255, 255, 0.6);
+
+        }
+
+        span.showTime {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+
+        .showTime:last-child {
+            min-width: 150px;
+        }
+
+        #btns {
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            min-width: 14vw;
+            height: 5vh;
+            border-radius: 6px;
+            font-size: 20px;
+            background: #008b74;
+            color: #4ffbdf;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            letter-spacing: 0.3vw;
+            box-shadow: 0px 0.50rem 0px 0px rgba(1, 253, 211, 0.8);
+            font-family: 'Phudu', cursive;
+        }
+
+        button:hover {
+            color: #008b74;
+            background-color: white;
+            box-shadow: 0px 0.50rem 0px 0px rgba(0, 139, 116, 0.5);
+            border-color: white;
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        #Heading {
+            min-width: 90%;
+            overflow: hidden;
+        }
+
+        #status {
+            font-size: 3rem;
+        }
+
+        #box2 {
+            width: 60%;
+            height: auto;
+            margin: 0px auto;
+            background-color: rgba(235, 248, 245, 0.781);
+            /* box-shadow: 0px 0px 10px 0px rgba(151, 177, 171, 0.904); */
+            display: none;
+            overflow-y: scroll;
+        }
+
+        .table {
+            width: 100%;
+            font-family: 'Phudu', cursive;
+        }
+
+        thead {
+            height: 8vh;
+            font-size: 30px;
+            justify-content: center;
+            position: sticky;
+            top: 0;
+            background-color: rgba(235, 248, 245, 1);
+        }
+
+        .col:first-child {
+            position: sticky;
+            width: 20%;
+        }
+
+        .col:last-child {
+            width: 80%;
+        }
+
+        .row {
+            height: 5vh;
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px solid black;
+        }
+
+        @media screen and (max-width:850px) {
+            #box {
+                width: 90%;
+            }
+
+            #status {
+                font-size: 2rem;
+            }
+
+            .timeBox {
+                width: 13vw;
+                height: 13vh;
+                font-size: 50px;
+                border-radius: 30px;
+            }
+
+            span.showTime {
+                width: 30%;
+                font-size: 15px;
+            }
+
+            button {
+                font-size: 15px;
+            }
+
+            #box2 {
+                min-width: 90%;
+                height: auto;
+                margin: 0px auto;
+                background-color: rgba(235, 248, 245, 0.781);
+                /* box-shadow: 0px 0px 10px 0px rgba(151, 177, 171, 0.904); */
+                display: none;
+                overflow-y: scroll;
+            }
+
+            thead {
+                font-size: 20px;
+            }
+
+            .row {
+                height: 5vh;
+                font-size: 15px;
+                text-align: center;
+                border-bottom: 1px solid black;
+            }
+        }
+
+        @media screen and (max-width:500px) {
+            #box {
+                width: 90%;
+                height: 42vh;
+                margin: 15vh auto 5vh;
+            }
+
+            .timeBox {
+                width: 13vw;
+                height: 10vh;
+                font-size: 40px;
+                text-align: center;
+                border-radius: 30px;
+                border: 1px solid black;
+                font-family: 'Phudu', cursive;
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+
+            #time_input {
+                font-size: 80px;
+                margin: 0;
+            }
+
+            span.showTime {
+                width: 30%;
+                font-size: 10px;
+            }
+
+            span.showTime:last-child {
+                min-width: 25%;
+            }
+
+            button {
+                font-size: 15px;
+            }
+
+            #box2 {
+                min-width: 90%;
+                height: auto;
+                margin: 0px auto;
+                background-color: rgba(235, 248, 245, 0.781);
+                /* box-shadow: 0px 0px 10px 0px rgba(151, 177, 171, 0.904); */
+                display: none;
+                overflow-y: scroll;
+            }
+
+            thead {
+                font-size: 15px;
+            }
+
+            .row {
+                height: 5vh;
+                font-size: 10px;
+                text-align: center;
+                border-bottom: 1px solid black;
+            }
+        }
+
+        @media screen and (max-width:350px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            #box {
+                width: 90%;
+            }
+
+            #Heading {
+                height: 10vh;
+            }
+
+            #status {
+                font-size: 1.5rem;
+            }
+
+            .timeBox {
+                width: 13vw;
+                height: 6vh;
+                font-size: 20px;
+                text-align: center;
+                border-radius: 30px;
+                border: 1px solid black;
+                font-family: 'Phudu', cursive;
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+
+            #time_input {
+                font-size: 20px;
+            }
+
+            span.showTime {
+                width: 30%;
+                font-size: 10px;
+            }
+
+            span.showTime:last-child {
+                min-width: 35%;
+            }
+
+            button {
+                font-size: 15px;
+            }
+
+            thead {
+                font-size: 15px;
+            }
+
+            .row {
+                height: 5vh;
+                font-size: 8px;
+                text-align: center;
+                border-bottom: 1px solid black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Stop Watch</h1>
+    <section id="box">
+        <div id="Heading">
+            <h1 id="status">Time</h1>
+        </div>
+        <div id="time_input">
+            <span class="showTime">
+                <input type="number" class="timeBox" name="hours" id="hours_input" value="0" maxlength="23"
+                    readonly>hours
+            </span>:
+            <span class="showTime">
+                <input type="number" class="timeBox" name="minutes" id="minutes_input" value="0" maxlength="59"
+                    readonly>
+                Minutes</span>:
+            <span class="showTime">
+                <input type="number" class="timeBox" name="seconds" id="seconds_input" value="0" maxlength="59"
+                    readonly>
+                Seconds</span>:
+            <span class="showTime">
+                <input type="number" class="timeBox" name="seconds" id="microseconds_input" value="0" maxlength="99"
+                    readonly>
+                Micro Seconds</span>
+        </div>
+        <div id="btns">
+            <button id="startTime">Start</button>
+            <button id="stopTime">Stop</button>
+            <button id="split-up">Split-Up</button>
+            <button id="reset">Reset</button>
+        </div>
+    </section>
+
+    <section id="box2" class="">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col">s.number</th>
+                    <th class="col">Time</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+            </tbody>
+        </table>
+    </section>
+    <script>
+
+        let hours = document.getElementById("hours_input");
+        let minutes = document.getElementById("minutes_input");
+        let seconds = document.getElementById("seconds_input");
+        let microseconds = document.getElementById("microseconds_input");
+        let startTime = document.getElementById("startTime");
+        let stoptime = document.getElementById("stopTime");
+        let splittime = document.getElementById("split-up");
+        let reset = document.getElementById("reset")
+        let btn = document.getElementById("status");
+        let count = 0;
+        let tbody = document.getElementById("body");
+        let timeobj = {
+            Hours: "",
+            Minutes: "",
+            Seconds: "",
+            Microseconds: ""
+        }
+
+        let time = ''
+
+        function CurrentTime() {
+            if (seconds.value < 59 && microseconds.value == 100) {
+                seconds.value++;
+                microseconds.value = 0;
+            }
+            else if (minutes.value < 59 && seconds.value == 59 && microseconds.value == 100) {
+                minutes.value++
+                seconds.value = 0;
+                microseconds.value = 0;
+            }
+            else if (minutes.value == 59 && seconds.value == 59 && microseconds.value == 100) {
+                hours.value++
+                minutes.value = 0;
+                seconds.value = 0;
+                microseconds.value = 0;
+            }
+            else if (hours.value == 23 && minutes.value == 59 && seconds.value == 59 && microseconds.value == 99) {
+                clearInterval(time)
+            }
+            else {
+                microseconds.value++;
+            }
+
+        }
+
+        function title() {
+            btn.style.transition = "2s"
+            btn.style.transform = "translateY(0px)"
+            return;
+        }
+
+        startTime.addEventListener("click", () => {
+            setTimeout(() => {
+                document.getElementById("Heading").style.display = "block"
+                btn.style.transform = "translateY(100px)"
+            }, 0);
+            setTimeout(() => {
+                btn.innerHTML = "Time Starts..."
+                title()
+            }, 800);
+            time = setInterval(() => {
+                CurrentTime()
+            }, 10);
+
+        })
+
+        reset.addEventListener("click", () => {
+            clearInterval(time)
+            hours.value = 0
+            minutes.value = 0
+            seconds.value = 0
+            microseconds.value = 0
+            count = 0
+
+            tbody.innerHTML = "";
+            document.getElementById("box2").style.display = "none"
+            document.getElementById("box").style.marginTop = "15vh"
+
+            setTimeout(() => {
+                document.getElementById("Heading").style.display = "block"
+                btn.style.transform = "translateY(100px)"
+            }, 0);
+            setTimeout(() => {
+                btn.innerText = "You Reset The Time"
+                title()
+            }, 800);
+
+        })
+
+        stoptime.addEventListener("click", () => {
+            clearInterval(time)
+            setTimeout(() => {
+                document.getElementById("Heading").style.display = "block"
+                btn.style.transform = "translateY(100px)"
+            }, 0);
+            setTimeout(() => {
+                btn.innerText = "Time Stops Now..."
+                title()
+            }, 800);
+        })
+
+        splittime.addEventListener('click', () => {
+            Hours = hours.value,
+                Minutes = minutes.value,
+                Seconds = seconds.value,
+                Microseconds = microseconds.value
+            count++;
+            setTimeout(() => {
+                document.getElementById("Heading").style.display = "block"
+                btn.style.transform = "translateY(100px)"
+            }, 0);
+            setTimeout(() => {
+                btn.innerText = "Time Split Now"
+                title()
+            }, 800);
+            console.log("btn clicked");
+            document.getElementById("box").style.marginTop = "10vh"
+            setTimeout(() => {
+                document.getElementById("box2").style.display = "block"
+                btn.style.transform = "translateY(100px)"
+            }, 0);
+
+            let tablecontent = `<tr id="#${count}">
+                    <td class="row">#${count}</td>
+                    <td class="row">${Hours} hour : ${Minutes} minute : ${Seconds} second : ${Microseconds} milliseconds </td></tr>`;
+
+            tbody.innerHTML = tbody.innerHTML + tablecontent
+
+        })
+    </script>
+</body>
+
+</html>

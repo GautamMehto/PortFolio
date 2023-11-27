@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500&family=Oswald&family=Varela+Round&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+        }
+
+        body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        #st {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 60vw;
+            height: 25vh;
+            margin: 2rem auto 2rem auto;
+            border-radius: 50px;
+            background-color: rgba(253, 253, 253, 0.4);
+        }
+
+        span {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 11vw;
+            height: 18vh;
+            border-radius: 50px;
+            background: transparent;
+            background-color: rgba(253, 253, 253, 0.588);
+        }
+
+
+        .font {
+            text-align: center;
+            font-size: 85px;
+        }
+
+        #day {
+            width: 45vw;
+            height: 12vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-size: 60px;
+            border-radius: 50px;
+            outline: 15px solid rgba(253, 253, 253, 0.4);
+            margin: 2rem auto 3rem auto;
+            background-color: rgba(253, 253, 253, 0.588);
+            /* background-color: rgba(253, 253, 253, 1); */
+            font-family: 'Oswald';
+        }
+
+        .box {
+            width: 90vw;
+            height: 26vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-size: 25px;
+            border-radius: 50px;
+            outline: 15px solid rgba(253, 253, 253, 0.4);
+            margin: 0rem auto;
+            padding: 0px 20px;
+            background-color: rgba(253, 253, 253, 0.588);
+            /* background-color: rgba(253, 253, 253, 1); */
+            font-family: 'Oswald';
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            overflow: auto;
+        }
+
+        #greet {
+            min-width: 20vw;
+            height: 5vh;
+            text-align: center;
+            font-family: 'Oswald';
+        }
+
+        #quote {
+            width: 90vw;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-family: 'Oswald';
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            overflow: auto;
+        }
+
+        button {
+            min-width: 13vw;
+            height: 6vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            font-size: 20px;
+            margin: 2.3rem auto 0rem auto;
+        }
+
+        button:hover {
+            color: rgb(0, 101, 236);
+            background-color: white;
+            border-color: white;
+            -webkit-box-shadow: 0px 0.50rem 0px 0px rgba(0, 101, 236, 1);
+            box-shadow: 0px 0.50rem 0px 0px rgba(0, 101, 236, 1);
+        }
+
+        button:active {
+            -webkit-transform: scale(.95);
+            -ms-transform: scale(.95);
+            transform: scale(.95);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            height: 5vh;
+            color: white;
+            background: black;
+            font-size: 10px;
+        }
+
+        nav {
+            height: inherit;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+        @media screen and (max-width:1100px) {
+            #st {
+                min-width: 60%;
+                height: 25vh;
+                margin: 2rem auto 2rem auto;
+                border-radius: 50px;
+                background-color: rgba(253, 253, 253, 0.4);
+            }
+
+            .font {
+                font-size: 50px;
+            }
+
+            #day {
+                font-size: 40px;
+            }
+
+            .box {
+                font-size: 20px;
+            }
+        }
+
+        @media screen and (max-width:750px) {
+            span {
+                width: 12vw;
+                height: 15vh;
+            }
+
+            #st {
+                min-width: 70%;
+            }
+
+            .font {
+                font-size: 40px;
+            }
+
+            #day {
+                font-size: 25px;
+            }
+
+            .box {
+                font-size: 15px;
+            }
+        }
+        @media screen and (max-width:550px) {
+            span {
+                width: 15vw;
+                height: 15vh;
+            }
+
+            #st {
+                min-width: 90%;
+            }
+
+            .font {
+                font-size: 30px;
+            }
+
+            #day {
+                font-size: 20px;
+            }
+
+            .box {
+                font-size: 15px;
+            }
+            button{
+                font-size: 15px;
+            }
+        }
+        @media screen and (max-width:350px) {
+            span {
+                width: 15vw;
+                height: max-content;
+                padding: 1vh;
+            }
+
+            #st {
+                min-width: 90%;
+            }
+
+            .font {
+                font-size: 25px;
+            }
+
+            #day {
+                font-size: 15px;
+            }
+
+            .box {
+                font-size: 15px;
+            }
+            button{
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="st" class="font">
+        <span class="font" id="hour"></span>:
+        <span class="font" id="min"></span>:
+        <span class="font" id="sec"></span>-
+        <span class="font" id="ampm"></span>
+    </div>
+    <div id="day"></div>
+    <div class="box">
+        <div id="greet">Greeting</div>
+        <div id="quote">
+        </div>
+    </div>
+    <button type="button">New Quote</button>
+    <footer>
+        <nav>
+            <div id="timeZone">Time-Zone</div>
+            <div id="location">Location</div>
+        </nav>
+    </footer>
+
+    <script>
+        let message = "";
+        let body = document.querySelector("body");
+        const x = document.getElementById("location");
+
+        setInterval(() => {
+            let hours
+            var date = new Date();
+            let h = date.getHours();
+            let ampm = "AM"
+            if (h < 12) {
+                h = h < 10 ? "0" + h : h
+                ampm = "AM"
+                message = "Good Morning Dear"
+            }
+            else if (h > 12) {
+                h = h - 12
+                h = h < 10 ? "0" + h : h
+                ampm = "PM"
+            }
+
+            let m = date.getMinutes();
+            if (m < 10) {
+                m = '0' + m
+            }
+
+            let s = date.getSeconds();
+            if (s < 10) {
+                s = '0' + s
+            }
+
+            let d = date.getDate();
+            if (d < 10) {
+                d = '0' + d
+            }
+
+            let month = date.getMonth();
+            month++
+            if (month < 10) {
+                month = '0' + month
+            }
+            let monthList = ["January", "February", "March", "April", "May", "June", "July",
+                "August", "September", "October", "November", "December"];
+            let y = date.getFullYear();
+
+            hours = parseInt(h)
+            ColorChange(hours, ampm)
+
+            document.getElementById("hour").innerHTML = `${h}`;
+            document.getElementById("min").innerHTML = `${m} `;
+            document.getElementById("sec").innerHTML = `${s} `;
+            document.getElementById("ampm").innerHTML = `${ampm} `;
+            document.getElementById("day").innerHTML = `${d}-${monthList[month - 1]}-${y}`;
+            // console.log(date.getTimezoneOffset())
+            document.getElementById("timeZone").innerHTML = `Time-Zone: ${date.getTimezoneOffset()} Minutes`
+            getLocation()
+
+        }, 1000);
+
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            x.innerHTML = "Location: Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude;
+        }
+
+        function ColorChange(hours, ampm) {
+            if ((hours > 5 || hours < 12) && ampm == "AM") {
+                try {
+                    body.style.backgroundImage = "url(https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80)"
+                } catch (error) {
+                    body.style.backgroundImage = 'linear-gradient(to left bottom, #4200aa, #0065ec, #009cfb, #00cde7, #06f8cd)';
+                }
+                console.log("Part 1");
+                message = "Good Morning Dear"
+            }
+            else if ((hours > 11 || hours < 4) && ampm == "PM") {
+                try {
+                    body.style.backgroundImage = "url(https://images.unsplash.com/photo-1601252729350-79bb4ca870a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)"
+                } catch (error) {
+                    body.style.backgroundImage = 'linear-gradient(to right bottom, #ff000c, #fd6600, #f29900, #e0c400, #c6eb12)';
+                }
+                console.log("Part 2");
+                message = "Good Afternoon Dear"
+            }
+            else if ((hours > 3 && hours < 7) && ampm == "PM") {
+                try {
+                    body.style.backgroundImage = "url(https://images.unsplash.com/photo-1602625689417-454d540f7dbb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1572&q=80)"
+                } catch (error) {
+                    body.style.backgroundImage = 'linear-gradient(to left bottom, #dc1e02, #ef6300, #fa9700, #fdc800, #f8f806)';
+                }
+                console.log("Part 3");
+                message = "Good Evening Dear"
+            }
+            else if ((hours > 6 && hours < 12) && ampm == "PM") {
+                try {
+                    body.style.backgroundImage = "url(https://images.unsplash.com/photo-1506606401543-2e73709cebb4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)"
+                } catch (error) {
+                    alert()
+                    body.style.backgroundImage = 'linear-gradient(to right bottom, #2f0ade, #002ec8, #0038ac, #003b8b, #173b69)';
+                }
+                message = "Good Night Dear"
+                console.log("Part 4");
+            }
+            else if ((hours > 12 && hours < 6) && ampm == "AM") {
+                try {
+                    body.style.backgroundImage = "url(https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1513&q=80)"
+                } catch (error) {
+                    body.style.backgroundImage = 'linear-gradient(to right bottom, #121112, #18161a, #1c1b22, #1e212b, #1d2734)';
+                }
+                console.log("Part 5");
+                message = "Good Morning Dear"
+            }
+            else {
+                console.log("Else");
+            }
+            console.log(message);
+            document.getElementById("greet").innerHTML = message;
+        }
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // DOM elements
+            const button = document.querySelector("button");
+            let quote = document.querySelector("quote");
+
+            async function updateQuote() {
+                // Fetch a random quote from the Quotable API
+                try {
+                    const response = await fetch("https://api.quotable.io/random");
+                    const data = await response.json();
+                    if (response.ok) {
+                        // Update DOM elements
+                        // console.log(Greet)
+                        document.getElementById("quote").innerHTML = data.content + "<br>" + `~By ${data.author}`;
+                    } else {
+                        quote.innerHTML = "An error occured";
+                        console.log(`HTTP Response Code: ${response?.status}`)
+                        document.getElementById("quote").innerHTML = `${response?.status} Error`
+                    }
+
+                } catch (error) {
+                    document.getElementById("quote").innerHTML = "Please Connect The Internet"
+                }
+            }
+            // Attach an event listener to the `button`
+            button.addEventListener("click", updateQuote);
+
+            // call updateQuote once when page loads
+            updateQuote();
+        });
+    </script>
+</body>
+
+</html>
