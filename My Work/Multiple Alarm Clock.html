@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Phudu&family=Poppins:wght@300&family=Prompt&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-image: linear-gradient(to right bottom, #6e0578, #6d2695, #643db2, #4f52cf, #1267eb);
+        }
+
+        h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 12vh;
+            font-size: 50px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #timeHeading {
+            width: max-content;
+            background-color: red;
+
+        }
+
+        #currentDate,
+        #currentTime {
+            width: 40%;
+            height: 10vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 3vh auto;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0px 0px 24px 5px rgba(255, 255, 255, 0.6);
+            font-family: 'Prompt', sans-serif;
+            font-size: 50px;
+        }
+
+        #currentDate {
+
+            border-radius: 0px 20px 20px 0px;
+            float: left;
+        }
+
+        #currentTime {
+            border-radius: 20px 0px 0px 20px;
+            float: right;
+        }
+
+        #box {
+            width: 60%;
+            height: 35vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5vh auto;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0px 0px 24px 5px rgba(255, 255, 255, 0.6);
+            font-family: 'Prompt', sans-serif;
+
+        }
+
+        #alarms {
+            width: 60%;
+            height: 30vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 5vh auto;
+            margin-bottom: 0vh;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0px 0px 24px 5px rgba(255, 255, 255, 0.6);
+            font-family: 'Prompt', sans-serif;
+            overflow: auto;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #hours_input,
+        #minutes_input,
+        #period {
+            border-radius: 40px;
+            border: 1px solid black;
+            font-family: 'Phudu', cursive;
+            background-color: rgba(255, 255, 255, 0.6);
+            font-size: 30px;
+        }
+
+        #time_input {
+            width: 70%;
+            height: 15vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 4vh;
+            font-size: 60px;
+        }
+
+        .timeBox {
+            width: 12vw;
+            height: 10vh;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        option {
+            font-size: 15px;
+        }
+
+
+        #btns {
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        button {
+            width: 9vw;
+            height: 5vh;
+            border-radius: 6px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            letter-spacing: 0.3vw;
+            box-shadow: 0px 0.50rem 0px 0px rgba(0, 0, 0, 0.3);
+            font-family: 'Phudu', cursive;
+        }
+
+        button:hover {
+            color: rgb(0, 101, 236);
+            background-color: white;
+            border-color: white;
+            box-shadow: 0px 0.50rem 0px 0px rgba(0, 101, 236, 1);
+        }
+
+        button:active {
+            transform: scale(.95);
+        }
+
+        #box2 {
+            width: 50vw;
+            overflow: hidden;
+        }
+
+        #status {
+            height: 8vh;
+            font-size: 35px;
+        }
+
+        .table {
+            width: 100%;
+            height: 25vh;
+            font-family: 'Phudu', cursive;
+        }
+
+        thead {
+            height: 3vh;
+            font-size: 18px;
+            justify-content: center;
+            position: sticky;
+            top: 0px;
+            background-color: rgba(235, 248, 245, 1);
+        }
+
+        tbody {
+            width: 100%;
+            height: 2vh;
+            overflow: auto;
+            overflow-block: auto;
+            word-spacing: 1vw;
+        }
+
+        .col:first-child {
+            position: sticky;
+            width: 20%;
+        }
+
+        .col:last-child {
+            width: 20%;
+        }
+
+        .row {
+            height: 5vh;
+            font-size: 20px;
+            text-align: center;
+            border-bottom: 1px solid black;
+        }
+
+        button#delete {
+            width: 7vw;
+            height: 4vh;
+            border-radius: 6px;
+            font-size: 15px;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 2.5vw;
+            box-shadow: 0px 0.50rem 0px 0px rgba(0, 0, 0, 0.3);
+            font-family: 'Phudu', cursive;
+        }
+
+        .disable {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .anima{
+            animation: anime 2s linear normal ;
+        }
+
+        @keyframes anime {
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Alarm Clock</h1>
+    <section id="currentDate"></section>
+    <section id="currentTime"></section>
+    <section id="box">
+        <div id="box2">
+            <h1 id="status">Enter Time</h1>
+        </div>
+        <div id="time_input" class="">
+            <select class="timeBox" id="hours_input">
+                <option value="Hours" selected disabled hidden>Hour</option>
+            </select> :
+
+            <select class="timeBox" id="minutes_input">
+                <option value="Minutes" selected disabled hidden>Minutes</option>
+            </select>
+            :
+            <select class="timeBox" id="period">
+                <option value="AM/PM" selected disabled hidden>AM/PM</option>
+            </select>
+        </div>
+        <div id="btns">
+            <button id="setTime">Set</button>
+            <button id="Clear">Clear</button>
+        </div>
+    </section>
+    <section id="alarms" class="">
+        <h2>Alarm List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col">s.number</th>
+                    <th class="col">Time</th>
+                    <th class="col">Action</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+            </tbody>
+        </table>
+    </section>
+</body>
+<script>
+    let currentDate = document.getElementById("currentDate");
+    let currentTime = document.getElementById("currentTime");
+    let selectMenu = document.querySelectorAll("select");
+    let btn = document.getElementById("status");
+    let tbody = document.getElementById("body");
+    let setBtn = document.getElementById("setTime");
+    let clearBtn = document.getElementById("Clear")
+    let myAudio = new Audio('alarm-clock-short-6402.mp3');
+    let count = 0
+    let ring;
+    let alarmListArray = [];
+    var month= ["January","February","March","April","May","June","July",
+            "August","September","October","November","December"];
+
+    for (let i = 12; i > 0; i--) {
+        i = i < 10 ? `0${i}` : i;
+        let option = `<option value="${i}">${i}</option>`;
+        selectMenu[0].firstElementChild.insertAdjacentHTML("afterend", option);
+    }
+
+    for (let i = 59; i >= 0; i--) {
+        i = i < 10 ? `0${i}` : i;
+        let option = `<option value="${i}">${i}</option>`;
+        selectMenu[1].firstElementChild.insertAdjacentHTML("afterend", option);
+    }
+
+    for (let i = 2; i > 0; i--) {
+        let ampm = i == 1 ? "AM" : "PM";
+        let option = `<option value="${ampm}">${ampm}</option>`;
+        selectMenu[2].firstElementChild.insertAdjacentHTML("afterend", option);
+    }
+
+    setInterval(() => {
+        let nowTime = new Date;
+        var d = nowTime.getDate();
+        var Month = nowTime.getMonth();
+        Month++
+        var h = nowTime.getHours();
+        var m = nowTime.getMinutes();
+        var s = nowTime.getSeconds();
+        var ampm = "AM"
+        if (h <= 12) {
+            return;
+        }
+        else if (h > 12) {
+            h -= 12
+            ampm = "PM"
+        }
+        d = d < 10 ? "0" + d : d
+        Month = Month < 10 ? "0" + Month : Month
+        h = h < 10 ? "0" + h : h
+        m = m < 10 ? "0" + m : m
+        s = s < 10 ? "0" + s : s
+        currentDate.innerHTML = `${d}/${month[Month-1]}/${nowTime.getFullYear()}`;
+        currentTime.innerHTML = `${h}H : ${m}M : ${s}S ${ampm}`;
+        checktime(h, m, s, ampm )
+    }, 1000);
+
+    function title() {
+        btn.style.transition = "2s"
+        btn.style.transform = "translateY(0px)"
+        return;
+    }
+
+    function checktime(h, m, s, ampm) {
+        alarmListArray.forEach((element, id) => {
+            console.log("Alarm Time", element, " ", id);
+            if (`${h}H : ${m}M ${ampm}` != element && s==0 && count == 1) {
+                myAudio.pause()
+            }
+            else if (`${h}H : ${m}M ${ampm}` == element && s>=0 && count == 1) {
+                myAudio.pause()
+            }
+            else if (`${h}H : ${m}M ${ampm}` == element &&s<=59  && count ==0) {
+                myAudio.play()
+                myAudio.loop = true
+            }
+        })
+    }
+
+    setBtn.addEventListener("click", () => {
+        let time = `${selectMenu[0].value}H : ${selectMenu[1].value}M ${selectMenu[2].value}`;
+        if (time.includes("Hour") || time.includes("Minute") || time.includes("AM/PM")) {
+            return alert("Please, select a valid time to set Alarm!");
+        }
+        alarmListArray.push(time);
+        console.log("array Push Successfully");
+
+        document.getElementById("alarms").style.display = "flex"
+        document.getElementById("alarms").classList.add("anima")
+        document.body.style.backgroundImage = 'linear-gradient(to left bottom, #dc1e02, #ef6300, #fa9700, #fdc800, #f8f806)';
+        setTimeout(() => {
+            document.getElementById("box2").style.display = "block"
+            btn.style.transform = "translateY(100px)"
+        }, 0);
+        setTimeout(() => {
+            btn.innerHTML = "Alarm Set..."
+            title()
+        }, 800);
+        displayAlarm();
+        count = 0
+    })
+    function displayAlarm() {
+        let tablecontent= '';
+            alarmListArray.forEach((element, i) => {
+            tablecontent += `<tr id="#${i+1}">
+                    <td class="row">#${i+1}</td>
+                    <td class="row">${element}</td>
+                    <td class="row" ><button id="delete" onclick="deleteAlarm(${i})">Delete</button></td></tr>`;
+            })
+            tbody.innerHTML = tablecontent;
+    }
+
+    function deleteAlarm(id) {
+        alarmListArray.splice(id, 1);
+        displayAlarm();
+    }
+    clearBtn.addEventListener("click", () => {
+        document.body.style.backgroundImage = 'linear-gradient(to left bottom, #4200aa, #0065ec, #009cfb, #00cde7, #06f8cd)';
+
+        setTimeout(() => {
+            document.getElementById("box2").style.display = "block"
+            btn.style.transform = "translateY(100px)"
+        }, 0);
+        setTimeout(() => {
+            btn.innerText = "Alarm Ring Pause..."
+            title()
+        }, 800);
+        count = 1
+        document.getElementById("time_input").classList.remove("disable")
+
+    })
+</script>
+
+</html>

@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Kanit:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222;
+}
+
+.card-container {
+    min-width: 100%;
+    /* height: 100vh; */
+    /* background-color: aqua; */
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+.card {
+    /* max-width: 40%; */
+    min-width: 40%;
+    background-image: linear-gradient(214deg, #12e0df, #00e1d3, #00e2c4, #00e2b2, #26e29e, #32da95, #3ad38d, #40cb85, #3cbb85, #3dab83, #419b7f, #478b79);
+    color: #fff;
+    margin: 5% auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+    position: relative;
+}
+
+.card2 {
+    /* max-width: 60%; */
+    min-width: 50%;
+    background-image: linear-gradient(214deg, #12e0df, #00e1d3, #00e2c4, #00e2b2, #26e29e, #32da95, #3ad38d, #40cb85, #3cbb85, #3dab83, #419b7f, #478b79);
+    color: #fff;
+    margin: 5% auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    position: relative;
+    display: none;
+    text-align: center;
+    /* overflow: hidden; */
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search input {
+    border: 0;
+    outline: 0;
+    background-color: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 15px;
+    font-size: 1.2rem;
+}
+
+.search button {
+    border: 0;
+    outline: 0;
+    background-color: #ebfffc;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color: #222;
+    color: #f7f7f7;
+}
+
+.search button:active {
+    transform: scale(0);
+    transition: 1s ease;
+}
+
+.search button img {
+    width: 15px;
+}
+
+.weather {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    display: none;
+
+}
+
+.weatherFive {
+    width: 100%;
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px 0px;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+}
+
+th {
+    padding-bottom: 30px;
+    font-size: 1.3rem;
+    font-family: 'Kanit', sans-serif;
+}
+
+table tbody tr td img {
+    width: 60px;
+}
+
+.errormsg {
+    margin-top: 3vh;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    scale: 0;
+}
+
+.Weather-icon {
+    width: 160px;
+    margin-top: 2rem;
+
+}
+
+.weather h1 {
+    font-size: 80px;
+    font-weight: 400;
+    margin-top: -15px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 20px;
+    margin-top: 30px;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.humidity,
+.wind {
+    font-size: 2rem;
+}
+
+@media screen and (max-width:1200px) {
+
+    td,
+    th {
+        padding: 3px 0px;
+        font-size: 1rem;
+    }
+
+    th {
+        padding-bottom: 20px;
+        font-size: 1rem;
+    }
+
+    table tbody tr td img {
+        width: 50px;
+    }
+}
+
+@media screen and (max-width:950px) {
+    .card-container {
+        min-width: 150%;
+        flex-direction: column;
+    }
+    .card2 {
+        min-width: 80%;
+    }
+}
+
+@media screen and (max-width:450px) {
+
+    .card {
+        min-width: 60%;
+    }
+
+    .card2 {
+        min-width: 100%;
+    }
+
+    table {
+        min-width: 100%;
+    }
+
+    td,
+    th {
+        padding: 3px 0px;
+        /* font-size: 1.8rem; */
+    }
+
+    th {
+        padding-bottom: 20px;
+        font-size: .8rem;
+    }
+
+    table tbody tr td img {
+        width: 40px;
+    }
+}
+
+@media screen and (max-width:275px) {
+    .card2 {
+        padding: 10px 15px;
+        min-width: 110%;
+    }
+}
+@media screen and (max-width:240px) {
+    .card2 {
+        min-width: 125%;
+    }
+}
